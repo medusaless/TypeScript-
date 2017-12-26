@@ -12,19 +12,19 @@ interface PlainInterface {
 
 
 //  报错:Variable 'personObj' is used before being assigned
-let personObj1: PlainInterface;
-personObj1.name = 'abc';
-personObj1.age = 123;
+// let personObj1: PlainInterface;
+// personObj1.name = 'abc';
+// personObj1.age = 123;
 
 
 // 正确
-let personObj2: PlainInterface = {
+let personObj12: PlainInterface = {
     name: 'asdf',
     age: 123
 }
 
 // 正确，这里的<IPerson》
-let personObj3: PlainInterface = <PlainInterface>{
+let personObj13: PlainInterface = <PlainInterface>{
     name: 'aaa',
     age: 123
 };
@@ -58,7 +58,7 @@ interface ClassInterface {
     age: number
 }
 
-class Clock implements ClassInterface {
+class Clock2 implements ClassInterface {
     name: string; 
     public age: number;
     constructor(h: number, m: number) { }
@@ -74,10 +74,24 @@ interface ComplexInterface {
     isValid: boolean
 }
 
-let icomplex: ComplexInterface;
-icomplex = <ComplexInterface>function (a, b) {
+let icomplex2: ComplexInterface = <ComplexInterface>function (a, b) {
 }
-icomplex.isValid = false;
-icomplex.getName = function () {
+icomplex2.isValid = false;
+icomplex2.getName = function () {
     return 'aaa'
 }
+
+/**
+ * 接口的自动类型转换（C#,JAVA没有)
+ */
+interface Person5{
+    name:string,
+    age:number
+}
+
+let obj = {
+    name:'aaa'
+}
+
+let obj2 = <Person5>obj;
+obj2.age = 45;

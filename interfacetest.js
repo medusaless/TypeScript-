@@ -2,19 +2,19 @@
 /**
  * typescript，接口
  * 1.和java,C#接口有一定不同，只要“形似”即可实现接口
- * 2.接口只针对public
+ *
  */
 //  报错:Variable 'personObj' is used before being assigned
-let personObj1;
-personObj1.name = 'abc';
-personObj1.age = 123;
+// let personObj1: PlainInterface;
+// personObj1.name = 'abc';
+// personObj1.age = 123;
 // 正确
-let personObj2 = {
+let personObj12 = {
     name: 'asdf',
     age: 123
 };
 // 正确，这里的<IPerson》
-let personObj3 = {
+let personObj13 = {
     name: 'aaa',
     age: 123
 };
@@ -29,13 +29,17 @@ funObj = function (name, age) {
 //正确
 var funObj2 = {};
 funObj2 = (a, b) => { };
-class Clock {
+class Clock2 {
     constructor(h, m) { }
 }
-let icomplex;
-icomplex = function (a, b) {
+let icomplex2 = function (a, b) {
 };
-icomplex.isValid = false;
-icomplex.getName = function () {
+icomplex2.isValid = false;
+icomplex2.getName = function () {
     return 'aaa';
 };
+let obj = {
+    name: 'aaa'
+};
+let obj2 = obj;
+obj2.age = 45;
