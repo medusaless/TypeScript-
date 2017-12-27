@@ -59,7 +59,7 @@ interface ClassInterface {
 }
 
 class Clock2 implements ClassInterface {
-    name: string; 
+    name: string;
     public age: number;
     constructor(h: number, m: number) { }
 }
@@ -84,14 +84,66 @@ icomplex2.getName = function () {
 /**
  * 接口的自动类型转换（C#,JAVA没有)
  */
-interface Person5{
-    name:string,
-    age:number
+interface Person5 {
+    name: string,
+    age: number
 }
 
 let obj = {
-    name:'aaa'
+    name: 'aaa'
 }
 
 let obj2 = <Person5>obj;
 obj2.age = 45;
+
+/* 构造函数接口
+*  因为当一个类继承接口时，只对类的非静态部分进行类型检查，构造函数为类的静态部分，因此要做特殊的处理才
+*  能通过接口来约束类的构造函数
+*/
+/********************方法一********************************* */
+// 类的“构造函数接口”，用以约束构造函数
+interface IConstructor {
+    new(name: string): IClassContent
+}
+
+// 类的“内容”接口，用以约束内的非静态部分
+interface IClassContent {
+    getName(): string
+}
+
+// 这个类首先继承了“内容”接口，实现自身需要的业务
+class TestClass implements IClassContent {
+    private name: string = '';
+    constructor(name: string) {
+        this.name = name;
+    }
+    getName(): string {
+        return this.name;
+    }
+}
+/*********************************
+ *********** 这里是重点 ***********
+ ********************************* 
+ * 1.createClass函数返回“内容接口”
+ * 2.createClass形参是“构造函数接口”，以及构造函数必需的参数
+ * 两个接口同时进行约束，实现了预期效果
+ */
+function createClass(ctor: IConstructor, name: string): IClassContent {
+    return new ctor(name);
+}
+
+let clsObj = createClass(TestClass, 'asdf')
+
+
+/******************************方法二************************* */
+
+interface ClockStatic {
+    new(hour: number, minute: number);
+}
+
+class ClockTest {
+    currentTime: Date;
+    constructor(h: number, m: number) { }
+}
+
+var cs: ClockStatic = ClockTest; var newClock = new cs(7, 30);

@@ -43,3 +43,29 @@ let obj = {
 };
 let obj2 = obj;
 obj2.age = 45;
+// 这个类首先继承了“内容”接口，实现自身需要的业务
+class TestClass {
+    constructor(name) {
+        this.name = '';
+        this.name = name;
+    }
+    getName() {
+        return this.name;
+    }
+}
+/*********************************
+ *********** 这里是重点 ***********
+ *********************************
+ * 1.createClass函数返回“内容接口”
+ * 2.createClass形参是“构造函数接口”，以及构造函数必需的参数
+ * 两个接口同时进行约束，实现了预期效果
+ */
+function createClass(ctor, name) {
+    return new ctor(name);
+}
+let clsObj = createClass(TestClass, 'asdf');
+class ClockTest {
+    constructor(h, m) { }
+}
+var cs = ClockTest;
+var newClock = new cs(7, 30);
