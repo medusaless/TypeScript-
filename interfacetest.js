@@ -69,3 +69,6 @@ class ClockTest {
 }
 var cs = ClockTest;
 var newClock = new cs(7, 30);
+//接口也可以不通过interface定义，可以直接申明一个接口字面量，如下
+function addNumber(obj) {
+}

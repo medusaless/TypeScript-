@@ -103,7 +103,7 @@ obj2.age = 45;
 /********************方法一********************************* */
 // 类的“构造函数接口”，用以约束构造函数
 interface IConstructor {
-    new(name: string): IClassContent
+    new(name: string): IClassContent  //构造函数，可以理解成类类型
 }
 
 // 类的“内容”接口，用以约束内的非静态部分
@@ -146,4 +146,12 @@ class ClockTest {
     constructor(h: number, m: number) { }
 }
 
-var cs: ClockStatic = ClockTest; var newClock = new cs(7, 30);
+var cs: ClockStatic = ClockTest; 
+var newClock = new cs(7, 30);
+
+
+
+//接口也可以不通过interface定义，可以直接申明一个接口字面量，如下
+function addNumber(obj:{name:string,id:string}):void{
+
+}
