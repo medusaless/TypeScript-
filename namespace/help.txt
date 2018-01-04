@@ -1,0 +1,4 @@
+命名空间
+
+编译命令：tsc --outFile js文件名.js typescript主文件名.ts
+例如：tsc --outFile main.js main.ts

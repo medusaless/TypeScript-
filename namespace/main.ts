@@ -1,0 +1,1 @@
+MathPart.minus(1, 1);
