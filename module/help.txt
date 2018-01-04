@@ -1,0 +1,38 @@
+
+模块：
+typescript可以将.ts代码编译成根据编译时指定的模块目标参数，编译器会生成相应的供Node.js (CommonJS)，Require.js (AMD)，isomorphic (UMD), SystemJS或ECMAScript 2015 native modules (ES6)模块加载系统使用的代码
+
+例如,将ts编译为amd模块加载策略的js代码：
+tsc --module amd main.ts   // main.ts为入口文件
+
+
+/* main.ts
+import getJob = require("./hellomodule");
+getJob();
+*/
+
+
+/* hellomodule.ts
+const job: string = "coder";
+function getJob() {
+    return job;
+};
+export = getJob;
+*/
+
+
+如果要在ts文件里引入第三方的js库（比如Jquery或者自己写的js模块），那么该js没有类型约束，怎么办？
+这时候就可以引入该文件的.d.ts，然后typescript就会根据这个类型申明文件对该js进行类型验证。
+
+下面引用一下stackoverflow的一段话：
+
+The "d.ts" file is used to provide typescript type information about an API that's written in JavaScript. 
+The idea is that you're using something like jQuery or underscore, an existing javascript library. 
+You want to consume those from your typescript code.
+
+Rather than rewriting jquery or underscore or whatever in typescript, you can instead write the d.ts file, 
+which contains only the type annotations.
+ Then from your typescript code you get the typescript benefits of static type checking while still using a pure JS library.
+
+
+
